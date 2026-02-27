@@ -2,8 +2,11 @@ name: Daily Automated Commit
 
 on:
   schedule:
-    - cron: '30 2 * * *'   # Runs daily at 02:30 UTC
-  workflow_dispatch:         # Allows manual trigger
+    - cron: '30 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write        # ← This is the fix
 
 jobs:
   daily-commit:
