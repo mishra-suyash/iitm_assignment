@@ -1,0 +1,48 @@
+name: Playwright Table Scraper
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 3 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: 22f3001275@ds.study.iitm.ac.in - Scrape and Sum Tables
+        run: |
+          npm init -y
+          npm install playwright
+          npx playwright install chromium --with-deps
+          node scrape.js
+```
+
+---
+
+### Step 4: Commit Both Files
+
+Commit to your repo:
+- `scrape.js` at root
+- `.github/workflows/playwright-scrape.yml`
+
+---
+
+### Step 5: Trigger and Check Logs
+
+1. Go to **Actions** tab → **Playwright Table Scraper**
+2. Click **Run workflow**
+3. Wait ~2–3 minutes (Playwright install takes time)
+4. Click into the run → expand **"22f3001275@ds.study.iitm.ac.in - Scrape and Sum Tables"** step
+5. You'll see output like:
+```
+Seed 82: 12345.67
+Seed 83: 23456.78
+...
+Total sum across all seeds: XXXXXX.XX
